@@ -1,0 +1,29 @@
+{#
+ # Text formatting with custom shortcodes.
+ #
+ # @param {String} content  – Content string [required]
+ # @param {String} type     - Type switch case [optional|default]
+ # @return {String}
+ #
+ # @example {{stringformatter(entry, 'shortcodes')}}
+ #
+ #}
+{% macro stringFormatter(content, type = 'shortcodes') %}
+{# Replace umlauts #}
+{% set stripUmlauts = {
+  'ü': 'ue',
+  'ö': 'oe',
+  'ä': 'ae'
+} %}
+{% set shortcodes = {
+  '[my-shortcode]': '<span class="my-shortcode">Some output</span>',
+  '[another-shortcode]': '<span class="another-shortcode">More output</span>'
+}%}
+
+{%- switch type -%}
+  {%- case 'link' -%}
+    {{content|replace({'http://':'','https://':''})}}
+  {%- case 'formatter' -%}
+    {{content|replace(shortcodes)|raw}}
+{%- endswitch -%}
+{% endmacro %}

@@ -1,0 +1,57 @@
+{#
+ # Image component with optional lazy loading
+ #
+ # @see https://css-tricks.com/aspect-ratio-boxes/
+ # @see https://www.andyshora.com/css-image-container-padding-hack.html
+ #
+ # @param {String} original [required]
+ # @param {String} preview [required]
+ # @param {Number} width [required]
+ # @param {Number} height [required]
+ #
+ # @param {Array} class [optional]
+ # @param {Array} image [optional]
+ # @param {String} alt [optional]
+ # @param {String} small [optional]
+ # @param {String} medium [optional]
+ # @param {String} large [optional]
+ # @param {String} xlarge [optional]
+ # @param {String} link [optional]
+ # @param {String} linkTitle [optional]
+ #
+ # @example
+ #    {{helper.include('component', 'image', {
+ #      image: entry.image,
+ #      original: entry.image.getUrl('teaser'),
+ #      preview: entry.image.getUrl('thumbnail'),
+ #      width: entry.image.getWidth('teaser'),
+ #      height: entry.image.getHeight('teaser'),
+ #      lazy: true,
+ #      class: 'custom-css-class',
+ #      link: entry.url,
+ #      linkTitle: entry.title,
+ #      macros: macros
+ #    })}}
+ #}
+{% import macros as helper %}
+
+{% set assetsFolder = craft.app.config.general.aliases.assetsFolder %}
+
+{% set imagePadding = helper.imagePadding(height, width) %}
+{% set altText = (alt ?? null) ? alt : image %}
+{% set lazyAttr = (lazy ?? null) ? helper.lazyLoad('attr') : null %}
+{% set lazyClass = (lazy ?? null) ? helper.lazyLoad('class') : null %}
+
+<div class="{{class ?? null}} c-image" style="{{imagePadding}}">
+  {% if link ?? null %}<a href="{{link}}" title="{{linkTitle ?? null}}">{% endif %}
+  <img srcset="{{ preview ?? null }}" class="c-image__thumb" alt="{{altText}} {{'imageThumbnailAlt'|t}}" width="{{width}}" height="{{height}}">
+  <picture>
+    {% if xlarge ?? null %} <source {{lazyAttr}}srcset="{{ xlarge }}" class="{{lazyClass}}" media="{{helper.imageMediaQuery('xlarge')}}">{% endif %}
+    {% if large ?? null %}  <source {{lazyAttr}}srcset="{{ large }}" class="{{lazyClass}}" media="{{helper.imageMediaQuery('large')}}">{% endif %}
+    {% if medium ?? null %} <source {{lazyAttr}}srcset="{{ medium }}" class="{{lazyClass}}" media="{{helper.imageMediaQuery('medium')}}">{% endif %}
+    {% if small ?? null %}  <source {{lazyAttr}}srcset="{{ small }}" class="{{lazyClass}}" >{% endif %}
+    <img {{lazyAttr}}src="{{ original ?? null }}"{% if lazy ?? null %} src="{{assetsFolder}}img/placeholder.gif"{% endif %} class="original {{lazyClass}}" alt="{{altText}}" width="{{width}}" height="{{height}}">
+    {% if lazy ?? null %}<noscript><img src="{{original ?? null}}" class="original" alt="{{image}}" width="{{width}}" height="{{height}}"></noscript>{% endif %}
+  </picture>
+  {% if link ?? null %}</a>{% endif %}
+</div>

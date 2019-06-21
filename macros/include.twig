@@ -1,0 +1,51 @@
+{#
+ # Include helper for atomic design systems
+ #
+ # Folder structure:
+ #
+ #  templates/
+ #    partials/
+ #      _/
+ #    styleguide/
+ #      01_components/
+ #        component_name/
+ #          component_name.html
+ #      02_modules/
+ #        module_name/
+ #          module_name.html
+ #      03_organisms/
+ #        organism_name/
+ #          organism_name.html
+ #      04_templates/
+ #        template_name/
+ #          template_name.html
+ #
+ # @param {String} type       – Atom type [required]
+ # @param {String} filepath   – Atom element name, i.e. image [required]
+ # @param {Array}  options    – Include options [optional]
+ # @return {Function}
+ #
+ # @example {{helper.include('components', 'image', {value: value})}}
+ # @example {{helper.include(NULL, 'header', {value: value})}}
+ # @example {{helper.include(_, 'javascript', {value: value})}}
+ #}
+{% macro include(type, filepath, options = {}) %}
+  {% switch type %}
+    {% case 'components' or 'modules' or 'organisms' or 'templates' %}
+      {% switch type %}
+        {% case 'components' %}
+          {% set prefix = '01_' %}
+        {% case 'modules' %}
+          {% set prefix = '02_' %}
+        {% case 'organisms' %}
+          {% set prefix = '03_' %}
+        {% case 'templates' %}
+          {% set prefix = '04_' %}
+      {% endswitch %}
+
+      {% set path = 'styleguide/' ~ prefix ~ type ~ '/' ~ filepath ~ '/_' ~ filepath %}
+    {% default %}
+      {% set path = 'partials/' ~ type ~ '/' ~ filepath %}
+  {% endswitch %}
+  {% include path ignore missing with options %}
+{% endmacro %}

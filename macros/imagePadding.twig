@@ -1,0 +1,17 @@
+{#
+ # Calculate padding-top for fluid images
+ # and aspect ration boxes.
+ #
+ # @see https://css-tricks.com/aspect-ratio-boxes/
+ # @see https://www.andyshora.com/css-image-container-padding-hack.html
+ #
+ # @param {Number} height  [required]
+ # @param {Number} width   [required]
+ # @return {String}
+ #
+ # @example <div style="{{helpers.imagePadding(height, width)}}">
+ #}
+{% macro imagePadding(height, width) %}
+{% set padding = (height / width) * 100 ~ '%' %}
+padding-top: {{padding}};
+{% endmacro %}

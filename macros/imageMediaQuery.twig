@@ -1,0 +1,15 @@
+{#
+ #  Image query for picturefill / srcset
+ #
+ #  @param {String} type – required
+ #  @return {String}
+ #
+ #  @example {{helpers.imageMediaQuery('large')}}
+ #}
+{% macro imageMediaQuery(type) %}
+{% switch type %}
+{% case 'medium' %}(min-width: 520px)
+{% case 'large' %}(min-width: 769px)
+{% case 'xlarge' %}(min-width: 1440px)
+{% endswitch %}
+{% endmacro %}

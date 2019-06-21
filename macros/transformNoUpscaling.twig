@@ -1,0 +1,16 @@
+{#
+ # Get desired image transform without upscaling if
+ # image source is smaller than transform.
+ #
+ # @param {Object} image            – Image object [required]
+ # @param {String} desiredTransform – Image transform [required]
+ # @return {String}
+ #
+ # @example {{helper.transformNoUpscaling(image, 'welcome')}}
+ #}
+{%- macro transformNoUpscaling(image, desiredTransform) -%}
+{%- set originalWidth = image.getWidth() -%}
+{%- set desiredWidth = image.getWidth(desiredTransform) -%}
+{%- set format = (desiredWidth < originalWidth) ? image.getUrl(desiredTransform) : image.getUrl() -%}
+{{format}}
+{%- endmacro -%}

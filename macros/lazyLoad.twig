@@ -1,0 +1,20 @@
+{#
+ # LazyLoad helper for image component
+ #
+ # @param {String} type [required]
+ # @return {String}
+ #
+ # @example <source {{helper.lazyLoad('attr')}}srcset="#" class="{{helper.lazyLoad('class')}}">
+ #}
+{% macro lazyLoad(type) %}
+{%- if type == 'attr' -%}
+{%- if not craft.app.request.isLivePreview() -%}
+data-
+{%- endif -%}
+{%- endif -%}
+{%- if type == 'class' -%}
+{%- if not craft.app.request.isLivePreview() -%}
+lozad
+{%- endif -%}
+{%- endif -%}
+{% endmacro %}

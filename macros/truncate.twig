@@ -1,0 +1,12 @@
+{#
+ # Truncate string
+ #
+ # @param {String} content  [requied]
+ # @param {Number} max      – Maximum characters [optional|default]
+ # @return {String}
+ #
+ # @example {{helper.truncate(entry, 130)}}
+ #}
+{% macro truncate(content, max = 100) %}
+{{content|length > content ? content|slice(0, max) ~ '...' : content}}
+{% endmacro %}

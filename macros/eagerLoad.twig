@@ -1,0 +1,17 @@
+{#
+ # Eager load shortcut
+ #
+ # @see https://docs.craftcms.com/v3/dev/eager-loading-elements.html
+ #
+ # @param {Object} object – Entry model [required]
+ # @param {Array} fields  – Fields to be eager loaded [required]
+ #
+ # @example {{helper.eagerLoad(entry, ['image'])}}
+ #}
+{% macro eagerLoad(object, fields = []) %}
+  {% do craft.app.elements.eagerLoadElements(
+    className(object),
+    [object],
+    [fields]
+  ) %}
+{% endmacro %}
