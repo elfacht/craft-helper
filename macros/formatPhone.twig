@@ -1,0 +1,9 @@
+{#
+ # Strip characters from phone numbers
+ #
+ # @param {String} vale – Phone number [required]
+ # @return {String}
+ #}
+{%- macro formatPhone(value) -%}
+{{value|trim|replace({'(': '', ')': '', ' ': '', '.': '', '-': ''})}}
+{%- endmacro -%}
