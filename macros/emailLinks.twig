@@ -1,0 +1,19 @@
+{#
+ # Twig macro converting email addresses in text into links secured from spambots.
+ #
+ # @see http://craftsnippets.com/articles/converting-email-addresses-into-links-using-twig-macro
+ #
+ # @param {Sting} text – required
+ # @param {String} class – optional
+ #
+ # @example
+ #  {{emailLinks('admin@admin.com', 'my-css-class')}}
+ #}
+
+{% macro emailLinks(text, class) %}
+{# v1 #}
+{% spaceless %}
+{% set text = text|replace('/([a-zA-Z0-9_.+-]+)+@([a-zA-Z0-9-]+.[a-zA-Z]+)/', '<a ' ~ (class ? 'class="' ~ class ~ '" ') ~ 'href="mailto:'~ '\\1&#64;\\2' ~'">'~ '\\1&#64;\\2' ~'</a>') %}
+{{text|raw}}
+{% endspaceless %}
+{% endmacro %}
