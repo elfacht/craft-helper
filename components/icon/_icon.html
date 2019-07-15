@@ -1,0 +1,11 @@
+{#
+ # Icon
+ #
+ # Using gulp-svgmin and gulp-svgstore to create a SVG sprite
+ # with ID based on filenames, i.e. svg_icon-logo.svg (#svg_icon-logo)
+ #
+ # @param {String} value [spite map identifier] – required
+ #}
+<svg class="c-icon">
+  <use xlink:href="#svg_icon-{{value}}"></use>
+</svg>

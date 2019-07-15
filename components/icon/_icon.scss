@@ -1,0 +1,42 @@
+//
+// SVG icons
+//
+
+/** ***********
+ * DOM wrapper for the SVG sprite
+ *
+ * Place the SVG sprite inside <div class="c-icon-defs" />
+ * before the end of </body>.
+ *
+ * For advanced usage see: https://osvaldas.info/caching-svg-sprite-in-localstorage
+ */
+.c-icon-defs {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+
+  polygon,
+  path,
+  rect {
+    fill: currentColor;
+    overflow: hidden;
+  }
+}
+
+
+
+/** ***********
+ * Component
+ *
+ * using `currentColor` to color the icon
+ * via CSS
+ */
+.c-icon {
+  display: inline-block;
+  fill: currentColor; // use element color for SVG fill
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  width: 1em; // default width
+  height: 1em; // default height
+}
