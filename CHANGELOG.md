@@ -2,6 +2,10 @@
 
 Things change, people change, everything changes.
 
+## 2019-07-17
+## Added
+- Added [tuncateChars.twig](macros/tuncateChars.twig) and [tuncateWords.twig](macros/tuncateWords.twig)
+
 ## 2019-07-15
 ### Added
 - Added [icon](components/icon/) component.

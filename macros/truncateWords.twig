@@ -1,0 +1,24 @@
+{#
+ # Truncate by words
+ #
+ # @source http://craftsnippets.com/articles/truncating-text-with-twig-macros-in-craft-cms
+ #
+ # @param {String} text – required
+ # @param {Number} length - requied
+ # @param {String} suffix - required|default
+ # @return {String}
+ #}
+{% macro truncateChars(text, length, suffix = '…') %}
+{% spaceless %}
+{# logic #}
+{% if text and length %}
+{% set text = text|striptags %}
+{% set suffix = suffix %}
+{% set stringy = create(
+  "Stringy\\Stringy",
+  [text]
+) %}
+{{ stringy.safeTruncate(length, suffix) }}
+{% endif %}
+{% endspaceless %}
+{% endmacro %}
