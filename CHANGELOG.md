@@ -3,6 +3,8 @@
 Things change, people change, everything changes.
 
 ## 2019-07-23
+### Added
+- Added empty trailing line.
 ### Fixed
 - Fixed typo in `stringFormatter` comments.
 
