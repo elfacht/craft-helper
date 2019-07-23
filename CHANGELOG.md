@@ -2,6 +2,10 @@
 
 Things change, people change, everything changes.
 
+## 2019-07-23
+### Fixed
+- Fixed typo in `stringFormatter` comments.
+
 ## 2019-07-17
 ## Added
 - Added [tuncateChars.twig](macros/tuncateChars.twig) and [tuncateWords.twig](macros/tuncateWords.twig)
